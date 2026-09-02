@@ -1626,7 +1626,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Transistor_FET:2N7000"
+		(symbol "Transistor_FET:IRLZ44N"
 			(pin_names
 				(hide yes)
 			)
@@ -1642,7 +1642,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "2N7000"
+			(property "Value" "IRLZ44N"
 				(at 5.08 0 0)
 				(effects
 					(font
@@ -1651,7 +1651,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+			(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
 				(at 5.08 -1.905 0)
 				(effects
 					(font
@@ -1662,7 +1662,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://www.vishay.com/docs/70226/70226.pdf"
+			(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
 				(at 5.08 -3.81 0)
 				(effects
 					(font
@@ -1672,7 +1672,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "0.2A Id, 200V Vds, N-Channel MOSFET, 2.6V Logic Level, TO-92"
+			(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1681,7 +1681,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "N-Channel MOSFET Logic-Level"
+			(property "ki_keywords" "N-Channel HEXFET MOSFET Logic-Level"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1690,7 +1690,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "TO?92*"
+			(property "ki_fp_filters" "TO?220*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1699,7 +1699,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "2N7000_0_1"
+			(symbol "IRLZ44N_0_1"
 				(polyline
 					(pts
 						(xy 0.254 1.905) (xy 0.254 -1.905)
@@ -1866,7 +1866,7 @@
 					)
 				)
 			)
-			(symbol "2N7000_1_1"
+			(symbol "IRLZ44N_1_1"
 				(pin input line
 					(at -5.08 0 0)
 					(length 2.54)
@@ -1877,7 +1877,7 @@
 							)
 						)
 					)
-					(number "2"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1895,7 +1895,7 @@
 							)
 						)
 					)
-					(number "3"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1913,7 +1913,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2004,143 +2004,6 @@
 				)
 			)
 			(symbol "GND_1_1"
-				(pin power_in line
-					(at 0 0 270)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "power:GNDREF"
-			(power)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "GNDREF"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "GNDREF_0_1"
-				(polyline
-					(pts
-						(xy -0.635 -1.905) (xy 0.635 -1.905)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.127 -2.54) (xy 0.127 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -1.27) (xy 0 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -1.27) (xy -1.27 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "GNDREF_1_1"
 				(pin power_in line
 					(at 0 0 270)
 					(length 0)
@@ -3788,6 +3651,28 @@
 			)
 		)
 	)
+	(global_label "GND"
+		(shape input)
+		(at 128.27 166.37 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5dcd9d05-a858-4edf-93f3-1aa6b0dfb59e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 128.27 173.2257 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "GPIO 5"
 		(shape input)
 		(at 256.54 73.66 0)
@@ -4458,7 +4343,7 @@
 			(uuid "66150d18-ad46-4f59-8c82-762b97dbf5bf")
 		)
 		(instances
-			(project ""
+			(project "BME280_KiCAD"
 				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
 					(reference "U5")
 					(unit 1)
@@ -4524,7 +4409,7 @@
 			(uuid "8b51c1c8-0b3b-465b-b24d-acf44cf97df3")
 		)
 		(instances
-			(project ""
+			(project "BME280_KiCAD"
 				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
 					(reference "#PWR02")
 					(unit 1)
@@ -5097,82 +4982,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:2N7000")
-		(at 166.37 137.16 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "418e774f-312a-4111-9cce-46a7e3641bb5")
-		(property "Reference" "Q3"
-			(at 172.72 135.8899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "2N7000"
-			(at 172.72 138.4299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline_Wide"
-			(at 171.45 139.065 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.vishay.com/docs/70226/70226.pdf"
-			(at 171.45 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "0.2A Id, 200V Vds, N-Channel MOSFET, 2.6V Logic Level, TO-92"
-			(at 166.37 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "9f780bf3-00c6-4b36-9446-867d32849a84")
-		)
-		(pin "3"
-			(uuid "8ef79863-2652-4f13-a04a-8e08df4ff9bf")
-		)
-		(pin "1"
-			(uuid "2246fc10-cc35-4491-aa2c-39841964c460")
-		)
-		(instances
-			(project "BME280_KiCAD"
-				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
-					(reference "Q3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "resistor_local:MFR-25FBF52-25K5")
 		(at 105.41 137.16 0)
 		(unit 1)
@@ -5361,16 +5170,16 @@
 		)
 	)
 	(symbol
-		(lib_id "Transistor_FET:2N7000")
-		(at 125.73 137.16 0)
+		(lib_id "Transistor_FET:IRLZ44N")
+		(at 166.37 137.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "51b57a0c-ae8b-4c59-8819-26d840718428")
-		(property "Reference" "Q2"
-			(at 125.476 127.508 0)
+		(uuid "4849e92f-c6d5-4bc3-aa31-301f5bf45875")
+		(property "Reference" "Q6"
+			(at 166.37 127.508 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5378,8 +5187,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2N7000"
-			(at 125.476 130.556 0)
+		(property "Value" "IRLZ44N"
+			(at 166.37 130.048 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5387,8 +5196,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline_Wide"
-			(at 130.81 139.065 0)
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+			(at 171.45 139.065 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5398,8 +5207,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.vishay.com/docs/70226/70226.pdf"
-			(at 130.81 140.97 0)
+		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
+			(at 171.45 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5408,8 +5217,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.2A Id, 200V Vds, N-Channel MOSFET, 2.6V Logic Level, TO-92"
-			(at 125.73 137.16 0)
+		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
+			(at 166.37 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5417,19 +5226,19 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
-			(uuid "1c9d286d-9f02-4ebb-8a7f-e28e4d23510a")
-		)
 		(pin "3"
-			(uuid "44746c15-a3bf-40f4-b40c-8f238fa7ac3b")
+			(uuid "2fdf34bf-d0a5-4ea2-938d-f601eaada4c2")
+		)
+		(pin "2"
+			(uuid "759dd6b8-6d6c-426b-b55e-67fff8ea5040")
 		)
 		(pin "1"
-			(uuid "38419fd3-8efd-4ac2-a6d1-ded97d74d529")
+			(uuid "1007fe8e-63be-4992-b265-ec88f8230124")
 		)
 		(instances
 			(project "BME280_KiCAD"
 				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
-					(reference "Q2")
+					(reference "Q6")
 					(unit 1)
 				)
 			)
@@ -5520,75 +5329,9 @@
 			(uuid "24a7b273-a40c-4f4e-82e6-023e1f98329e")
 		)
 		(instances
-			(project ""
+			(project "BME280_KiCAD"
 				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
 					(reference "U1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GNDREF")
-		(at 128.27 166.37 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "68d6e969-c8a3-4fdb-95c2-1981bdf76584")
-		(property "Reference" "#PWR01"
-			(at 128.27 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GNDREF"
-			(at 128.27 171.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 128.27 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 128.27 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GNDREF\" , reference supply ground"
-			(at 128.27 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "cdd33db5-feae-4616-b55e-268afbb687f5")
-		)
-		(instances
-			(project ""
-				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
-					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -5876,6 +5619,81 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_FET:IRLZ44N")
+		(at 125.73 137.16 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6dce654c-10b5-497f-ad58-b6904ec3ba07")
+		(property "Reference" "Q5"
+			(at 125.73 127.508 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "IRLZ44N"
+			(at 125.73 130.048 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+			(at 130.81 139.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
+			(at 130.81 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
+			(at 125.73 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "98ce04fd-ef3b-4431-b45e-5ef6c632596a")
+		)
+		(pin "2"
+			(uuid "8c7609b7-9c4c-4818-94b4-862153b42029")
+		)
+		(pin "1"
+			(uuid "820a4da1-e0cc-49d7-85dc-60b3f4dd003c")
+		)
+		(instances
+			(project "BME280_KiCAD"
+				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
+					(reference "Q5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "resistor_local:MFR-25FBF52-25K5")
 		(at 35.56 73.66 0)
 		(unit 1)
@@ -6091,7 +5909,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "esp32_local:ESP32-S3-DevKitC"
+		(property "Footprint" "esp32:ESP32-S3"
 			(at 231.14 140.97 0)
 			(effects
 				(font
@@ -6251,7 +6069,7 @@
 			(uuid "4f3924e1-5cb3-4f9c-8a22-1154e823699c")
 		)
 		(instances
-			(project ""
+			(project "BME280_KiCAD"
 				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
 					(reference "U2")
 					(unit 1)
@@ -7144,6 +6962,81 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_FET:IRLZ44N")
+		(at 83.82 137.16 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e6c84e96-0190-489e-b8e0-69b4518e56a5")
+		(property "Reference" "Q4"
+			(at 83.82 129.032 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "IRLZ44N"
+			(at 83.566 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_THT:TO-220-3_Vertical"
+			(at 88.9 139.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.irf.com/product-info/datasheets/data/irlz44n.pdf"
+			(at 88.9 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "47A Id, 55V Vds, 22mOhm Rds Single N-Channel HEXFET Power MOSFET, TO-220AB"
+			(at 83.82 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "34aa9c1c-dfdc-45b8-902a-79b28b7ae277")
+		)
+		(pin "2"
+			(uuid "f8d0d2d4-b9dd-4c6a-ac3d-905ed3811ecf")
+		)
+		(pin "1"
+			(uuid "585044fc-38a0-4c35-aec3-77cf0f9aa1e1")
+		)
+		(instances
+			(project "BME280_KiCAD"
+				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
+					(reference "Q4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "resistor_local:MFR-25FBF52-25K5")
 		(at 35.56 83.82 0)
 		(unit 1)
@@ -7326,81 +7219,6 @@
 			(project "BME280_KiCAD"
 				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
 					(reference "R7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_FET:2N7000")
-		(at 83.82 137.16 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e9d66a6f-f362-4002-afd5-768a5accd76b")
-		(property "Reference" "Q1"
-			(at 83.82 127.762 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "2N7000"
-			(at 83.82 130.556 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline_Wide"
-			(at 88.9 139.065 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.vishay.com/docs/70226/70226.pdf"
-			(at 88.9 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "0.2A Id, 200V Vds, N-Channel MOSFET, 2.6V Logic Level, TO-92"
-			(at 83.82 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "52ee5fda-9f9c-4be3-8b02-3e465a48b4b4")
-		)
-		(pin "3"
-			(uuid "c8265922-a5ed-4784-b583-cce7ae8d8e79")
-		)
-		(pin "1"
-			(uuid "7aa3941c-8190-4143-9e14-c28810590c05")
-		)
-		(instances
-			(project ""
-				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
-					(reference "Q1")
 					(unit 1)
 				)
 			)
@@ -7867,7 +7685,7 @@
 			(uuid "5630c879-764b-42c3-b0ef-df77d6c0473d")
 		)
 		(instances
-			(project ""
+			(project "BME280_KiCAD"
 				(path "/da4b1379-a10e-48f8-a248-44033167a9b2"
 					(reference "R1")
 					(unit 1)
