@@ -63,7 +63,7 @@ const byte space[5]   = {0x00,0x00,0x00,0x00,0x00};
 
 int lap = 100;
 unsigned long c_time, p_time = 0;
-double T, H, P; //T = temperature, H = humidity, P = pressure
+double T, H, P, t_fine; //T = temperature, H = humidity, P = pressure
 
 byte temp1, temp2, temp3, hum1, hum2, press1, press2, press3;
 
@@ -71,6 +71,18 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   Wire.begin(SDA, SCL);
+
+  /*
+  Wire.beginTransmission(bme);
+  Wire.write(0xF2); //for humidity
+  Wire.write(0x01);
+  Wire.endTransmission(false);
+  */
+
+  Wire.beginTransmission(bme);
+  Wire.write(0xF4); //for temp, pressure and normal mode
+  Wire.write(0x27); 
+  Wire.endTransmission();
   
   Wire.beginTransmission(oled);
   Wire.write(0x00);
@@ -98,8 +110,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   c_time = millis();
   if (c_time - p_time >= lap) {
-    T = sensorT() - c_time/100; P =sensorP() + c_time/100; H = sensorH() - c_time/1000;
-    Serial.println(T);
+    sensor(); H = sensorH() - c_time/1000;
     display(T, P, H);
     p_time = c_time;
   }
@@ -207,41 +218,174 @@ void clear_screen() {
   }
 }
 
-float sensorT(){
-  Wire.beginTransmission(bme);
-  Wire.write(0xFA);
-  Wire.endTransmission(false);
-
-  Wire.requestFrom(bme, 3);
-  if (Wire.available() == 3) { //you request 3 bytes each 8 bits so 24 bits (from registers 0xFA, 0xFB and 0xFC)
-    temp1 = Wire.read();
-    temp2 = Wire.read();
-    temp3 = Wire.read();
-  }
-  else {
-    Serial.println("I2C communication failed in temperature!");
-  }
-
-  return 22.9;
-}
-
-float sensorP(){
+void sensor(){
+  uint32_t temp, press, hum;
   Wire.beginTransmission(bme);
   Wire.write(0xF7);
   Wire.endTransmission(false);
 
-  Wire.requestFrom(bme, 3);
-  if (Wire.available() == 3) { //you request 3 bytes each 8 bits so 24 bits (from registers 0xF7, 0xF8 and 0xF9)
-    press1 = Wire.read();
-    press2 = Wire.read();
-    press3 = Wire.read();
+/*You request 8 bytes because temp and pressure have 3 bytes each and humidity has 2 bytes
+
+*/
+  Wire.requestFrom(bme, 8);
+  if (Wire.available() == 8){
+    press1 = Wire.read(); //pressure_msb
+    press2 = Wire.read(); //pressure_lsb
+    press3 = Wire.read(); //pressure_xlsb
+    press = ((uint32_t)(press1 << 12) | (uint32_t)(press2 << 4) | (uint32_t)(press3 >> 4));//adc_P
+
+    temp1 = Wire.read(); //temperature_msb
+    temp2 = Wire.read(); //temperature_lsb
+    temp3 = Wire.read(); //temperature_xlsb
+    temp = ((uint32_t)(temp1 << 12) | (uint32_t)(temp2 << 4) | (uint32_t)(temp3 >> 4));//adc_T
+
+    hum1 = Wire.read(); //humidity_msb
+    hum2 = Wire.read(); //humidity_lsb
+    hum = ((uint32_t)(hum1 << 8) | hum2);//adc_H
+
+    Serial.print(press1);
   }
   else {
-    Serial.println("I2C communication failed in pressure!");
+    Serial.println("I2C communication failed!");
+  }
+  calibration_T(temp);
+  calibration_P(press);
+}
+
+void calibration_T(uint32_t temp){
+  uint16_t dig_T1; int16_t dig_T2, dig_T3;
+  Wire.beginTransmission(bme);
+  Wire.write(0x88);
+  Wire.endTransmission();
+
+  Wire.requestFrom(bme, 6);
+  if (Wire.available() == 6){ //first read is lsb and second read is msb
+    byte t1_lsb = Wire.read(); 
+    byte t1_msb = Wire.read();
+    byte t2_lsb = Wire.read();
+    byte t2_msb = Wire.read();
+    byte t3_lsb = Wire.read();
+    byte t3_msb = Wire.read();
+
+    dig_T1 = ((uint16_t)t1_msb << 8 | t1_lsb);
+    dig_T2 = (int16_t)((uint16_t)t2_msb << 8 | t2_lsb);
+    dig_T3 = (int16_t)((uint16_t)t3_msb << 8 | t3_lsb);
+  }
+  else {
+    Serial.print("Cannot access calibration_T");
   }
 
-  return 99.4;
+  double var1, var2;
+
+  var1 = ((temp/16384.0) - (dig_T1/1024.0))*dig_T2;
+  var2 = ((temp/131072.0) - (dig_T1/8192.0));
+  var2 = var2 * var2 * dig_T3;
+
+  t_fine = var1 + var2;
+  T = t_fine/5120.0;
 }
+
+void calibration_P(uint32_t press){
+  uint16_t dig_P1;
+  int16_t dig_P2, dig_P3, dig_P4, dig_P5, dig_P6, dig_P7, dig_P8, dig_P9;
+  Wire.beginTransmission(bme);
+  Wire.write(0x8E);
+  Wire.endTransmission();
+
+  Wire.requestFrom(bme, 18);
+  if (Wire.available() == 18){
+    byte p1_lsb = Wire.read(); 
+    byte p1_msb = Wire.read();
+    byte p2_lsb = Wire.read();
+    byte p2_msb = Wire.read();
+    byte p3_lsb = Wire.read();
+    byte p3_msb = Wire.read();
+    byte p4_lsb = Wire.read(); 
+    byte p4_msb = Wire.read();
+    byte p5_lsb = Wire.read();
+    byte p5_msb = Wire.read();
+    byte p6_lsb = Wire.read();
+    byte p6_msb = Wire.read();
+    byte p7_lsb = Wire.read(); 
+    byte p7_msb = Wire.read();
+    byte p8_lsb = Wire.read();
+    byte p8_msb = Wire.read();
+    byte p9_lsb = Wire.read();
+    byte p9_msb = Wire.read();
+
+    dig_P1 = ((uint16_t)(p1_msb << 8) | p1_lsb);
+    dig_P2 = (int16_t)((uint16_t)p2_msb << 8 | p2_lsb);
+    dig_P3 = (int16_t)((uint16_t)p3_msb << 8 | p3_lsb);
+    dig_P4 = (int16_t)((uint16_t)p4_msb << 8 | p4_lsb);
+    dig_P5 = (int16_t)((uint16_t)p5_msb << 8 | p5_lsb);
+    dig_P6 = (int16_t)((uint16_t)p6_msb << 8 | p6_lsb);
+    dig_P7 = (int16_t)((uint16_t)p7_msb << 8 | p7_lsb);
+    dig_P8 = (int16_t)((uint16_t)p8_msb << 8 | p8_lsb);
+    dig_P9 = (int16_t)((uint16_t)p9_msb << 8 | p9_lsb);
+  }
+  else {
+    Serial.print("Cannot access calibration_P");
+  }
+  double var1, var2, p;
+
+  var1 = t_fine/2.0 - 64000.0;
+  var2 = var1*var1*((double)dig_P6)/32768.0;
+  var2 = var2 + var1 * ((double)dig_P5)/2.0;
+  var2 = (var2/4.0) + (((double)dig_P4)*65536.0);
+  var1 = (((double)dig_P3)*var1*var1/524288.0 + ((double)dig_P2)*var1)/524288.0;
+  var1 = (1.0 + var1 / 32768.0) * ((double)dig_P1);
+  if (var1 == 0.0){
+    return;
+  }
+  p = 1048576.0 - (double)press;
+  p = (p - (var2/4096.0))*6250.0 / var1;
+  var1 = ((double)dig_P9)*p*p/2147483648.0;
+  var2 = p*((double)dig_P8)/32768.0;
+  p = p + (var1 + var2 + ((double)dig_P7))/16.0;
+  P = p/100.0; //pressure in hPA
+}
+//Another time this is nasty
+/*
+void calibration_H(){
+  Wire.beginTransmission(bme);
+  Wire.write(0xA1);
+  Wire.endTransmission();
+
+  Wire.requestFrom(bme, 1);
+  if (Wire.available() == 1){
+    byte h1 = Wire.read();
+
+    uint8_t dig_H1 = (uint8_t)(h1);
+  }
+
+  Wire.beginTransmission(bme);
+  Wire.write(0xE1);
+  Wire.endTransmission();
+
+  Wire.requestFrom(bme, 7);
+  if (Wire.available() == 7){
+    byte h2_lsb = Wire.read();
+    byte h2_msb = Wire.read();
+    byte h3 = Wire.read();
+    byte h4_msb = Wire.read();
+    byte h4_5_shared = Wire.read(); 
+    byte h5_msb = Wire.read(); 
+    byte h6 = Wire.read();
+
+    byte shared4 = (h4_5_shared & 0x0F); int16_t dig_H4 = (int16_t)((int16_t)h4_msb << 4 | shared4);
+    byte shared5 = (h4_5_shared >> 4);
+
+    int16_t dig_H2 = (int16_t)((uint16_t)h2_msb << 8 | h2_lsb);
+    uint8_t dig_H3 = (uint8_t)(h3);
+    int16_t dig_H4 = (int16_t)((int16_t)(int8_t)h4_msb << 4 | shared4);
+    int16_t dig_H5 = (int16_t)((int16_t)(int8_t)h5_msb << 4 | shared5);
+    int8_t dig_H6 = (int8_t)(h6); 
+  }
+  else {
+    Serial.print("Cannot access calibration_H");
+  }
+}
+*/
 
 float sensorH(){
   Wire.beginTransmission(bme);
@@ -260,7 +404,6 @@ float sensorH(){
 
   return 58.5;
 }
-
 
 
 
